@@ -18,7 +18,7 @@ using namespace std;
 int main(int argc, char* argv[] ){
   if(argc!=3){
     cout << endl;
-    cout << "Usage is reading-file and name of file: " << endl;
+    cout << "Usage is myCopier and name of files: " << endl;
     cout << " e.g. ./myCopier read.txt write.txt" << endl;
     return 3;
   }
@@ -26,7 +26,7 @@ int main(int argc, char* argv[] ){
 // Reading the first argument
 string cmd(argv[1]);
 cout << endl;
-cout << "Starting the reading-file program" << endl;
+cout << "Starting the myCopier program" << endl;
 cout << "The current FILE Path is: " << FILE_PATH << endl;
 cout << "File name passed is: " << cmd << endl;
 cout << endl;
@@ -37,15 +37,27 @@ string line;
 // Define filename and file path
 string filename = "/"+ cmd;
 cout << "The string filename is: " << filename << endl;
-
 string pathName = FILE_PATH + filename;
 cout << "The string pathName is: " << pathName << endl;
 cout << endl;
+// Variable for writing file
+string cmd1(argv[2]);
+fstream output;
+string path(FILE_PATH);
 
 // The c_str() method returns a C++ string as a C string.
 fs.open((pathName).c_str(), fstream::in);
+// Reading and writing output to another file line-by-line.
+output.open((path+"/"+cmd1).c_str(), std::fstream::out);
+// Loop to read and write output
+while(getline(fs,line)) output << line << endl;
 
-//fs.open((FILE_PATH + filename).c_str(), std::fstream::in);
-while(getline(fs,line)) cout << line << endl;
+// Message to end the program
+cout << "Finished the myCopier Program" << endl;
+cout << endl;
+cout << endl;
+return 0;
+
+// Closed the file
 fs.close();
 }
